@@ -1,0 +1,23 @@
+name: Mini-GitOps CI Check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Check Bash syntax (sync.sh)
+        run: bash -n sync.sh
+
+      - name: Lint Bash script with ShellCheck
+        run: shellcheck sync.sh
+
+      - name: Validate docker-compose.yml
+        run: docker compose config --quiet
