@@ -31,3 +31,4 @@ elif [ "$IS_RUNNING" != "true" ]; then
     docker compose up -d
     log "Recovery complete. Container $CONTAINER_NAME is back online."
 fi
+echo $BROKEN_VAR
